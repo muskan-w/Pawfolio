@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("pawfolio-webapp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbd5f1a3bd27482587284ccdbf581cd7e508dabc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2284fda71f924068dd26f1a8bb446994fecec3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("pawfolio-webapp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pawfolio-webapp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

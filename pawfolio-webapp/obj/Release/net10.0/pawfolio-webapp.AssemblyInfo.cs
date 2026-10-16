@@ -11,11 +11,12 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-pawfolio_webapp-706e0aa7-537c-48d7-8a00-6e704a3a0075")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("pawfolio-webapp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbd5f1a3bd27482587284ccdbf581cd7e508dabc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2284fda71f924068dd26f1a8bb446994fecec3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("pawfolio-webapp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pawfolio-webapp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
