@@ -3,3 +3,9 @@
 ################################################################################
 
 
+# Visual Studio temporary files
+.vs/
+
+# Build output and generated files
+**/bin/
+**/obj/
