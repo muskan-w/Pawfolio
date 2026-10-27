@@ -3,15 +3,9 @@
 ################################################################################
 
 
-
-# Visual Studio
+# Visual Studio temporary files
 .vs/
 
-# .NET build outputs
+# Build output and generated files
 **/bin/
 **/obj/
-
-# Local environment and secrets
-.env
-.env.*
-!.env.example
