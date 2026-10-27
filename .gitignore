@@ -3,3 +3,15 @@
 ################################################################################
 
 
+
+# Visual Studio
+.vs/
+
+# .NET build outputs
+**/bin/
+**/obj/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
