@@ -10,13 +10,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString, sqlOptions => sqlOptions.EnableRetryOnFailure(//retry logic
         maxRetryCount: 5,
         maxRetryDelay: TimeSpan.FromSeconds(30),
-        errorNumbersToAdd: null))); 
+        errorNumbersToAdd: null)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>() //adding role support
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddSingleton<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, pawfolio_webapp.Services.LoggingEmailSender>();
+}
 
 //authentication and authorization policies
 var configuration = builder.Configuration;
@@ -30,6 +35,24 @@ builder.Services.AddAuthentication()
 builder.Services.AddSession();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await dbContext.Database.MigrateAsync();
+
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    if (!await roleManager.RoleExistsAsync("Customer"))
+    {
+        var roleResult = await roleManager.CreateAsync(new IdentityRole("Customer"));
+        if (!roleResult.Succeeded)
+        {
+            throw new InvalidOperationException(
+                $"Unable to create the Customer role: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
+        }
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

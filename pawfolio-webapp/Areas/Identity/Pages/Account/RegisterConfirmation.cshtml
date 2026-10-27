@@ -1,0 +1,17 @@
+@page
+@model pawfolio_webapp.Areas.Identity.Pages.Account.RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>
+    A confirmation link has been sent to <strong>@Model.Email</strong>.
+    Open the link in that email to activate your account.
+</p>
+@if (Model.IsDevelopment)
+{
+    <p class="text-muted">
+        In development, the link is written to the application log.
+    </p>
+}
