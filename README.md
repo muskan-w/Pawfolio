@@ -29,3 +29,6 @@ Team Members
 Muskan Waraich
 Jamie MacDonald 
 Natalia De Souza Neves Hoffmann
+
+Resources used in creation project listed here: 
+1. https://github.com/FLDevelopers/AspNetCoreMvcCustomLoginAndRegistration
