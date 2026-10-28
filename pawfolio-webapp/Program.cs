@@ -1,8 +1,16 @@
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using pawfolio_webapp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Google Authentication services
+builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+});
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -17,11 +25,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddRoles<IdentityRole>() //adding role support
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddSingleton<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, pawfolio_webapp.Services.LoggingEmailSender>();
-}
 
 //authentication and authorization policies
 var configuration = builder.Configuration;
@@ -69,6 +72,7 @@ else
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

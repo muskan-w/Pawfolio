@@ -1,7 +1,135 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="text-center">
-    <h1 class="display-4">Welcome to Pawfolio!</h1>
-    <p>Pawfolio is your tool to record all you pet's health information and track it.</p>
+<!--COLOR PALLETTE-->
+
+<!--#0E3A61 dark blue-->
+<!--#61350e brown-->
+<!--#EBEDF0 light gray-->
+<!--#F5EFE8 beige-->
+<!--#FFFFFF white-->
+<!--#343B43 dark gray-->
+
+<div class="img1-container">
+    <img class="img1" src="~/images/happy-dog.jpg" alt="Happy Dog" />
+    <!--https://www.pexels.com/photo/a-dog-s-head-outside-a-car-window-9738676/-->
+    <img class="img1" src="~/images/running-dog.jpg" alt="Running Dog" />
+    <!--https://www.pexels.com/photo/brown-long-coated-small-dog-running-on-green-grass-field-8081421/-->
+    <img class="img1" src="~/images/funny-dog.jpg" alt="Funny Dog" />
+    <!--https://www.pexels.com/photo/stylish-white-pomeranians-wearing-sunglasses-outdoors-34531298/-->
 </div>
+
+<section class="p1">
+
+    <h1>Pawfolio: A happier, healthier life for your pets</h1>
+    <h3>Because every paw deserves the best care.</h3>
+
+    <p class="intro-box">
+        Pawfolio is a pet health management system created to help pet owners
+        manage and monitor their pets' health information in one place.
+        Whether you want to keep track of your pet's weight, record changes
+        in behavior, organize medical history, or remember important care
+        activities, Pawfolio makes it easier to keep everything organized.
+        Our mission is to help pet owners stay informed about their pets'
+        health while making it easier to share important information with
+        veterinary professionals when needed.
+    </p>
+
+</section>
+
+
+<section class="p2">
+    <img class="pic" src="~/images/management.jpg" alt="Pet health care management" />
+    <!--https://www.pexels.com/photo/woman-petting-a-dog-while-holding-a-paper-6919719/-->
+    <div class="text-content">
+        <h3>All your pet's health information in one place.</h3>
+
+        <p>
+            With Pawfolio, you can create and manage profiles for your pets
+            and keep track of important information such as weight,
+            measurements, appearance, behavior, and food. You can record
+            new health information over time, review previous records, and
+            download your pet's health information when needed.
+            Keeping this information organized helps you monitor changes
+            and have important details available when caring for your pet.
+        </p>
+    </div>
+</section>
+
+<section class="p3">
+    <h3>Care made easier for every pet owner.</h3>
+
+    <div class="features">
+        <div class="feature">
+            <h4>Pet Profiles</h4>
+            <p>
+                Create and manage profiles for multiple pets, keeping their
+                personal information and health details organized in one place.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h4>Health History & Weight Tracking</h4>
+            <p>
+                Record health information, track weight changes over time,
+                and review previous records to monitor your pet's health.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h4>Reminders & Care Activities</h4>
+            <p>
+                Keep track of important care reminders and receive
+                recommended activities and care information based on
+                your pet's recorded information.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h4>Share Health Records</h4>
+            <p>
+                Authorize veterinary professionals to access your pet's
+                health records, making it easier to share relevant
+                information when your pet needs care.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="p4">
+    <div class="text-content">
+        <h3>Better communication. Better care.</h3>
+
+        <p>
+            Pawfolio also supports veterinary professionals by allowing
+            authorized users to review shared pet health records, monitor
+            changes, and add notes or updates when needed. Pet owners remain
+            in control of who can access their pet's information and can
+            revoke access when necessary.
+        </p>
+
+        <p>
+            Whether you are managing your pet's everyday health information
+            or sharing records with a veterinary professional, Pawfolio
+            helps keep important information accessible and organized.
+        </p>
+    </div>
+
+    <img class="pic" src="~/images/care.jpg" alt="Pet care" />
+    <!--https://www.pexels.com/photo/person-hand-holding-dog-paw-20195994/-->
+</section>
+
+<section class="p5">
+    <h3>Start your pet's health journey with Pawfolio.</h3>
+
+    <p>
+        Create your account and discover a simpler way to organize,
+        monitor, and share your pet's health information.
+    </p>
+
+    <a class="btn pawfolio-btn"
+       asp-area="Identity"
+       asp-page="/Account/Register">
+        Get Started
+    </a>
+</section>

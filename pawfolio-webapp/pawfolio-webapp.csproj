@@ -9,17 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Identity\Pages\Account\ConfirmEmail.cshtml.cs" />
-    <Compile Remove="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.cs" />
-    <Compile Remove="Services\LoggingEmailSender.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
-    <Content Remove="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth.AspNetCore3" Version="1.77.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="10.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.13" />
