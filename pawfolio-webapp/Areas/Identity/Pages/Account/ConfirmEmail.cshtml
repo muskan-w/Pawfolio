@@ -1,0 +1,16 @@
+@page
+@model pawfolio_webapp.Areas.Identity.Pages.Account.ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+}
+
+<h1>@ViewData["Title"]</h1>
+@if (Model.Confirmed)
+{
+    <p>Your email has been confirmed. You can now sign in.</p>
+    <a class="btn btn-primary" asp-page="/Account/Login" asp-area="Identity">Sign in</a>
+}
+else
+{
+    <p class="text-danger">@Model.ErrorMessage</p>
+}
