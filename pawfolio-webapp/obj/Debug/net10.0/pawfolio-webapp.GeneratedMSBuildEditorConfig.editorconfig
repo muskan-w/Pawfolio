@@ -20,65 +20,65 @@ build_property.TargetFrameworkVersion = v10.0
 build_property.EntryPointFilePath = 
 build_property.RootNamespace = pawfolio_webapp
 build_property.RootNamespace = pawfolio_webapp
-build_property.ProjectDir = C:\Users\jamie\source\repos\Pawfolio\pawfolio-webapp\
+build_property.ProjectDir = C:\Users\Jamie\source\repos\Pawfolio\pawfolio-webapp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\jamie\source\repos\Pawfolio\pawfolio-webapp
+build_property.MSBuildProjectDirectory = C:\Users\Jamie\source\repos\Pawfolio\pawfolio-webapp
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/Account/Register.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/Account/AccessedDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NlZERlbmllZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/Account/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmFsaWRhdGlvblNjcmlwdHNQYXJ0aWFsLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Home/Index.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Home/Privacy.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/404.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/404.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXDQwNC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/Error.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/_ViewImports.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/_ViewStart.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/_Layout.cshtml]
+[C:/Users/Jamie/source/repos/Pawfolio/pawfolio-webapp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-snfvvame17
