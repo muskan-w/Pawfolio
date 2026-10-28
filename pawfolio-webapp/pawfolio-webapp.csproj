@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Remove="Areas\Identity\Pages\Account\ConfirmEmail.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.cs" />
+    <Compile Remove="Services\LoggingEmailSender.cs" />
   </ItemGroup>
 
   <ItemGroup>
