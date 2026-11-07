@@ -169,6 +169,7 @@ h1 {
     text-align: left;
     border-left: 6px solid var(--brown);
     display: flex;
+    flex-direction:column;
 }
 
 .feature h4 {
@@ -235,6 +236,39 @@ h1 {
     background-color: var(--beige);
     color: var(--brown);
 }
+
+/* Register and Login page */
+.rl-main-div {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    min-height:80vh;
+    padding:20px;
+}
+
+.rl-card {
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem; 
+}
+
+.rl-link{
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.rl-btn:hover{
+    background-color:var(--brown);
+}
+
+
 @media (min-width: 1600px) {
     .container {
         max-width: 1400px;
