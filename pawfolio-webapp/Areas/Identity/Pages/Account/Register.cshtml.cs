@@ -117,7 +117,8 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    var roleResult = await _userManager.AddToRoleAsync(user, "Customer");
+                    // Assign the selected role to the user
+                    var roleResult = await _userManager.AddToRoleAsync(user, Input.Role);
                     if (!roleResult.Succeeded)
                     {
                         await _userManager.DeleteAsync(user);
