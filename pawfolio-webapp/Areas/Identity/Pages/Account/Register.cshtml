@@ -12,6 +12,7 @@
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 
                 <h3 class="rl-title">Create a new account</h3>
+                <hr />
 
                 <div asp-validation-summary="ModelOnly" class="text-danger rl-validation-summary"></div>
             
@@ -51,9 +52,15 @@
                 </div>
                 <div class="form-actions">
                     <button id="registerSubmit" type="submit" class="pawfolio-btn rl-btn">Register</button>
-                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="rl-link">Already have an account? Sign in</a>
                 </div>
+                
             </form>
+            <hr />
+            <div class="login-links">
+                <p>
+                <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Sign in</a>
+                </p>
+            </div>
         </div>
     </div>
 </section>
