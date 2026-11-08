@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Smtp2Go;
+using Smtp2Go.Api;
+using Smtp2Go.Api.Models.Emails;
 using System.ComponentModel.DataAnnotations;
 
 namespace pawfolio_webapp.Areas.Identity.Pages.Account
@@ -132,6 +135,28 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
                     }
 
                     _logger.LogInformation("User created a new account with password.");
+
+                    try
+                    {
+                        var service = new Smtp2GoApiService("api-3E53075C32244348A40DA3E8E760F8BA");
+
+                        var message = new EmailMessage(
+                            "Pawfolio Team <ndesouz1@lakeheadu.ca>", 
+                            $"{Input.FirstName} {Input.LastName} <{Input.Email}>",
+                            "Welcome to Pawfolio!"
+                        );
+
+                        message.BodyHtml = $"<html><h1>Welcome to Pawfolio, {Input.FirstName}!</h1><p>Your account has been successfully created with the role profile: <strong>{Input.Role}</strong>.</p></html>";
+                        message.BodyText = $"Welcome to Pawfolio, {Input.FirstName}!\nYour account has been successfully created with the role profile: {Input.Role}.";
+
+                        var response = await service.SendEmail(message);
+
+                        _logger.LogInformation("SMTP2GO Dispatch Event completed successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError($"SMTP2GO Delivery Pipeline Interruption: {ex.Message}");
+                    }
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
