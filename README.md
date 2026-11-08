@@ -25,6 +25,7 @@ Natalia De Souza Neves Hoffmann
 Resources used in creation project listed here: 
 1. https://github.com/FLDevelopers/AspNetCoreMvcCustomLoginAndRegistration
 2. https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-10.0&
+3. https://learn.microsoft.com/en-us/answers/questions/1276171/how-is-user-identity-isauthenticated-checked
 
 Instructions on Running:
 Click here to access the livesite: http://pawfolio.runasp.net/
