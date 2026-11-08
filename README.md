@@ -27,6 +27,8 @@ Resources used in creation project listed here:
 2. https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-10.0&
 3. https://learn.microsoft.com/en-us/answers/questions/1276171/how-is-user-identity-isauthenticated-checked
 4. https://learn.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-10.0
+5. https://stackoverflow.com/questions/30701006/how-to-get-the-current-logged-in-user-id-in-asp-net-core?
+6. https://stackoverflow.com/questions/44783744/how-to-authorize-a-user-to-only-see-his-own-records-with-asp-net-identity-2-0?
 
 Instructions on Running:
 Click here to access the livesite: http://pawfolio.runasp.net/
