@@ -1,0 +1,80 @@
+@model IEnumerable<pawfolio_webapp.Models.Pet>
+
+@{
+    ViewData["Title"] = "Pets";
+}
+
+<div class="pets-page">
+    <!-- page title -->
+    <div class="pets-header">
+        <h1>My Pets</h1>
+        <p>When you've created a pet profile, it will appear here.</p>
+
+        <!-- link to the create pet page -->
+        <a asp-action="Create" class="pawfolio-btn pets-add-btn">
+            Add A Pet Profile
+        </a>
+    </div>
+
+    <!-- display the list of pets (auto generated) -->
+    @if (Model.Any())
+    {
+        <div class="pets-grid">
+
+            <!-- loop through each pet in the model and display its details -->
+            @foreach (var item in Model)
+            {
+                <div class="pet-card">
+
+                    <!-- Pet icon -->
+                    <div class="pet-icon">
+                        <img src="~/images/care.jpg" alt="Pet Icon"/>
+                    </div>
+
+                    <!-- display each pet's information -->
+                    <div class="pet-info">
+                        <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+
+                        <p class="pet-breed">
+                            @Html.DisplayFor(modelItem => item.Breed)
+                        </p>
+
+                        <div class="pet-details">
+                            <span>Age: @Html.DisplayFor(modelItem => item.Age)</span>
+                            <span>Gender: @Html.DisplayFor(modelItem => item.Gender)</span>
+                        </div>
+                    </div>
+
+                    <!-- links to edit or delete the selected pet by PetsController -->
+                    <div class="pet-actions">
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           class="pet-edit">
+                            Edit Profile 
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="pet-delete">
+                            Delete
+                        </a>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <!-- if no pets exist -->
+        <div class="pets-empty">
+            <h2>No pet profiles yet!</h2>
+            <p>Start by creating a profile for your pet.</p>
+
+            <a asp-action="Create" class="pawfolio-btn">
+                Create Your Pet Profile
+            </a>
+        </div>
+    }
+</div>
