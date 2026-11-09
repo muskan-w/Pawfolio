@@ -8,12 +8,6 @@ namespace pawfolio_webapp.Data
     {
         // Allow the application to use the Pet model in the database context
         public DbSet<Models.Pet> Pets { get; set; }
-    }
-    public class ApplicationDbContext : IdentityDbContext
-    {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
         public DbSet<pawfolio_webapp.Models.FileModel> Files => Set<FileModel>();
 
     }
