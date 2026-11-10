@@ -14,3 +14,4 @@
 **/bin/
 **/obj/
 *.env
+/pawfolio-webapp/Properties/PublishProfiles/site99320-WebDeploy.pubxml
