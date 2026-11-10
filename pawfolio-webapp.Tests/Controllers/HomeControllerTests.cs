@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using pawfolio_webapp.Controllers;
 using pawfolio_webapp.Data;
 
-namespace pawfolio_webapp.Tests.Controllers;
+namespace Controllers;
 
 [TestClass]
 public class HomeControllerTests

@@ -25,7 +25,7 @@ public class RegisterConfirmationModel() : PageModel
         Email = email;
 
         var message = new EmailMessage(
-            "From Pawfolio <info@pawfolio.com>",
+            "From Pawfolio <jemacdon@lakeheadu.ca>",
             email);
 
         //email message content
