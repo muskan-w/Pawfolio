@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using pawfolio_webapp.Data;
+using pawfolio_webapp.Models;
 using Smtp2Go;
 using Smtp2Go.Api;
 
@@ -24,7 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         errorNumbersToAdd: null)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>() //adding role support
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
@@ -51,13 +52,17 @@ using (var scope = app.Services.CreateScope())
 
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-    if (!await roleManager.RoleExistsAsync("Customer"))
+
+    foreach (var roleName in new[] {"PetOwner", "VeterinaryProfessional" })
     {
-        var roleResult = await roleManager.CreateAsync(new IdentityRole("Customer"));
-        if (!roleResult.Succeeded)
+        if (!await roleManager.RoleExistsAsync(roleName))
         {
-            throw new InvalidOperationException(
-                $"Unable to create the Customer role: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
+            var roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+            if (!roleResult.Succeeded)
+            {
+                throw new InvalidOperationException(
+                    $"Unable to create the {roleName} role: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
+            }
         }
     }
 }
