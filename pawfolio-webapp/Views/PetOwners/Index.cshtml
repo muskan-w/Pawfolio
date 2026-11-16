@@ -1,5 +1,37 @@
-﻿@{
+﻿@model IEnumerable<pawfolio_webapp.Models.Pet>
+@{
     ViewData["Title"] = "Pet Owners Page";
 }
 
 <h1>Pet Owners Page</h1>
+<h2><a>@Html.ActionLink("Create a New Pet Profile", "Create", "Pets")</a></h2>
+<h3>Pets</h3>
+
+@if (Model?.Any() == true)
+{
+    <table class="table table-striped table-hover sortable">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Breed)</th>
+                <th>@Html.DisplayNameFor(model => model.Age)</th>
+                <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Breed)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No pets are available.</p>
+}

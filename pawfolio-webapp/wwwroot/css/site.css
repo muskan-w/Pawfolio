@@ -313,3 +313,304 @@ h1 {
     }
 
 }
+
+/* PET PROFILE STYLES */ 
+
+.pets-page {
+    width: 100%;
+    min-height: 75vh;
+    padding: 60px 8%;
+    background-color: var(--beige);
+}
+
+/* Page heading */
+
+.pets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.pets-header h1 {
+    color: var(--blue);
+    font-size: 42px;
+    padding: 0;
+    margin-bottom: 8px;
+}
+
+.pets-header p {
+    color: var(--textcolor);
+    font-size: 18px;
+    padding: 0;
+}
+
+/* Add pet button */
+
+.pets-add-btn {
+    text-decoration: none;
+    background-color: var(--brown);
+    color: var(--white);
+    border: 2px solid var(--brown);
+    transition: 0.2s ease;
+}
+
+.pets-add-btn:hover {
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+}
+
+/* Pet cards layout */
+
+.pets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/*  pet card */
+
+.pet-card {
+    background-color: var(--white);
+    border-radius: 18px;
+    padding: 28px;
+    border-left: 6px solid var(--brown);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.10);
+}
+
+/*  icon */
+
+.pet-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--beige);
+    font-size: 27px;
+    margin-bottom: 18px;
+}
+
+/* pet information */
+
+.pet-info h2 {
+    color: var(--blue);
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.pet-breed {
+    color: var(--brown);
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.pet-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pet-details span {
+    background-color: var(--gray);
+    color: var(--textcolor);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* card actions */
+
+.pet-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px solid var(--gray);
+}
+
+.pet-actions a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.pet-edit {
+    color: var(--blue);
+}
+
+.pet-delete {
+    color: var(--brown);
+}
+
+.pet-actions a:hover {
+    text-decoration: underline;
+}
+
+/* empty state */
+
+.pets-empty {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 55px 25px;
+    text-align: center;
+    max-width: 650px;
+    margin: 40px auto;
+}
+
+.pets-empty .pet-icon {
+    margin: 0 auto 20px;
+}
+
+.pets-empty h2 {
+    color: var(--blue);
+    margin-bottom: 10px;
+}
+
+.pets-empty p {
+    color: var(--textcolor);
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+/* CREATE AND EDIT PET PROFILE FORMS */
+
+.pet-form-page {
+    width: 100%;
+    min-height: 75vh;
+    padding: 60px 8%;
+    background-color: var(--beige);
+}
+
+/* Page heading */
+
+.pet-form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.pet-form-header h1 {
+    color: var(--blue);
+    font-size: 40px;
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+.pet-form-header p {
+    color: var(--textcolor);
+    font-size: 17px;
+}
+
+/* Form card */
+
+.pet-form-card {
+    background-color: var(--white);
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 20px;
+    border-top: 6px solid var(--brown);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Form fields */
+
+.pet-form-group {
+    margin-bottom: 22px;
+}
+
+.pet-form-group label {
+    display: block;
+    color: var(--blue);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.pet-form-group .form-control {
+    padding: 12px;
+    border: 1px solid #D5D9DE;
+    border-radius: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+}
+
+.pet-form-group .form-control:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(14, 58, 97, 0.12);
+}
+
+/* Form buttons */
+
+.pet-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.pet-submit-btn {
+    border: 2px solid var(--brown);
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    transition: 0.2s ease;
+}
+
+.pet-submit-btn:hover {
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+}
+
+.pet-back-btn {
+    color: var(--brown);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.pet-back-btn:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
+
+/* Responsive layout */
+
+@media (max-width: 576px) {
+    .pet-form-page {
+        padding: 40px 5%;
+    }
+
+    .pet-form-card {
+        padding: 25px;
+    }
+
+    .pet-form-header h1 {
+        font-size: 32px;
+    }
+
+    .pet-form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pet-back-btn {
+        text-align: center;
+    }
+
+    .pet-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    }
+
+   
+}

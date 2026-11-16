@@ -1,0 +1,67 @@
+@model pawfolio_webapp.Models.Pet
+
+@{
+    // Page title
+    ViewData["Title"] = "Create A Pet Profile";
+}
+
+<div class="pet-form-page">
+
+    <!-- heading  -->
+    <div class="pet-form-header">
+        <h1>Add A New Pet</h1>
+        <p>Let's get to know your fuzzy friend! Fill in the details below to create their profile.</p>
+    </div>
+
+    <!-- card for form -->
+    <div class="pet-form-card">
+
+        <!-- form to create a new pet -->
+        <form asp-action="Create">
+
+            <!-- validation errors -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- name card -->
+            <div class="form-group pet-form-group">
+                <label asp-for="Name" class="control-label">Pet Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter your pet's name"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- breed card -->
+            <div class="form-group pet-form-group">
+                <label asp-for="Breed" class="control-label">Breed</label>
+                <input asp-for="Breed" class="form-control" placeholder="Enter your pet's breed"/>
+                <span asp-validation-for="Breed" class="text-danger"></span>
+            </div>
+
+            <!-- pet age card -->
+            <div class="form-group pet-form-group">
+                <label asp-for="Age" class="control-label">Age</label>
+                <input asp-for="Age" class="form-control" placeholder="Enter your pet's age"/>
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <!-- gender card -->
+            <div class="form-group pet-form-group">
+                <label asp-for="Gender" class="control-label">Gender</label>
+                <input asp-for="Gender" class="form-control" placeholder="Enter your pet's gender"/>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <!-- submit form -->
+            <div class="pet-form-actions">
+                <input type="submit" value="Create Pet Profile" class="pawfolio-btn pet-submit-btn"/>
+                <a asp-action="Index" class="pet-back-btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

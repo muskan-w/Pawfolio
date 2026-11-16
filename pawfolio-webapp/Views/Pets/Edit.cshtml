@@ -1,0 +1,60 @@
+
+@model pawfolio_webapp.Models.Pet
+
+@{
+    ViewData["Title"] = "Edit Pet";
+}
+
+<h1>Edit Pet</h1>
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+
+            <!-- hidden field to pass the pet ID -->
+            <input type="hidden" asp-for="Id"/>
+
+            <!-- display validation errors -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- pet name -->
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- pet breed -->
+            <div class="form-group">
+                <label asp-for="Breed" class="control-label"></label>
+                <input asp-for="Breed" class="form-control"/>
+                <span asp-validation-for="Breed" class="text-danger"></span>
+            </div>
+
+            <!-- pet age -->
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control"/>
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <!-- pet gender -->
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control"/>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <!-- submit changes -->
+            <div class="form-group mt-3">
+                <input type="submit" value="Save Changes" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- return to pets list -->
+<div>
+    <a asp-action="Index">Back to Pets</a>
+</div>
