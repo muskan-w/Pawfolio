@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using pawfolio_webapp.Models;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 
 namespace pawfolio_webapp.Areas.Identity.Pages.Account;
 
-public class ConfirmEmailModel(UserManager<IdentityUser> userManager) : PageModel
+public class ConfirmEmailModel(UserManager<User> userManager) : PageModel
 {
     public bool Confirmed { get; private set; }
     public string? ErrorMessage { get; private set; }
