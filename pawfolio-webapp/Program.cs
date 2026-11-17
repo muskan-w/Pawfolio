@@ -24,14 +24,16 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-//authentication and authorization policies
+// Configure the cookie registered by AddDefaultIdentity. Identity pages are in
+// the Identity area, so the paths must include the area route prefix.
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+});
+
+// Authentication and authorization policies.
 var configuration = builder.Configuration;
-builder.Services.AddAuthentication()
-    .AddCookie(options =>
-    {
-        options.LoginPath = "/Account/Login";
-        options.AccessDeniedPath = "/Account/AccessDenied";
-    });
 // Add Google Authentication services --
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {

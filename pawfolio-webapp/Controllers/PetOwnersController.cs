@@ -6,7 +6,7 @@ using pawfolio_webapp.Data;
 
 namespace pawfolio_webapp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "PetOwner")]
     public class PetOwnersController : Controller
     {
         private readonly ApplicationDbContext _context;
