@@ -594,6 +594,22 @@ h1 {
 /* Responsive layout */
 
 @media (max-width: 576px) {
+    .mobile-nav-links {
+        display: none;
+        width: 100%;
+        padding-top: 12px;
+        text-align: right;
+    }
+
+    .mobile-nav-links.is-open {
+        display: block;
+    }
+
+    .mobile-nav-links .navbar-nav {
+        align-items: flex-end;
+        width: 100%;
+    }
+
     /* Home page phone layout */
     .img1-container {
         grid-template-columns: 1fr;
@@ -634,22 +650,31 @@ h1 {
     .p2,
     .p4 {
         flex-direction: column;
+        justify-content: center;
         gap: 25px;
         text-align: center;
     }
 
     .p2 .pic,
     .p4 .pic {
-        width: 100%;
+        width: auto;
         max-width: 100%;
         height: auto;
         max-height: 50vh;
         flex: 0 1 auto;
+        object-fit: contain;
+        border-radius: 20px;
+        overflow: hidden;
     }
 
     .p2 .text-content,
     .p4 .text-content {
         width: 100%;
+    }
+
+    .p2 .text-content,
+    .p2 h4 {
+        text-align: center;
     }
 
     .features {
@@ -696,6 +721,4 @@ h1 {
     object-fit: cover;
     border-radius: 50%;
     }
-
-   
 }
