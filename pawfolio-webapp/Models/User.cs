@@ -16,5 +16,7 @@ namespace pawfolio_webapp.Models
         [Required]
         [StringLength(50)]
         public string Role { get; set; } = string.Empty;
+
+        public VetInfo? VetInfo { get; set; }
     }
 }

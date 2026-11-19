@@ -10,6 +10,7 @@ using Smtp2Go;
 using Smtp2Go.Api;
 using Smtp2Go.Api.Models.Emails;
 using System.ComponentModel.DataAnnotations;
+using pawfolio_webapp.Data;
 using pawfolio_webapp.Models;
 
 namespace pawfolio_webapp.Areas.Identity.Pages.Account
@@ -21,18 +22,21 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
-            ILogger<RegisterModel> logger)
+            ILogger<RegisterModel> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         /// <summary>
@@ -71,6 +75,21 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Account Type")]
             public string Role { get; set; }
+
+            [Display(Name = "License number")]
+            public string LicenseNumber { get; set; }
+
+            [Display(Name = "Clinic name")]
+            public string ClinicName { get; set; }
+
+            [Display(Name = "Clinic address")]
+            public string ClinicAddress { get; set; }
+
+            [Display(Name = "Clinic contact")]
+            public string ClinicContact { get; set; }
+
+            [Display(Name = "Clinician position")]
+            public string ClinicianPosition { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -111,6 +130,11 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (Input?.Role == "VeterinaryProfessional")
+            {
+                ValidateVeterinaryDetails();
+            }
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -136,6 +160,21 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
                         }
 
                         return Page();
+                    }
+
+                    if (Input.Role == "VeterinaryProfessional")
+                    {
+                        _context.VetInfos.Add(new VetInfo
+                        {
+                            UserId = user.Id,
+                            LicenseNumber = Input.LicenseNumber.Trim(),
+                            ClinicName = Input.ClinicName.Trim(),
+                            ClinicAddress = Input.ClinicAddress.Trim(),
+                            ClinicContact = Input.ClinicContact.Trim(),
+                            ClinicianPosition = Input.ClinicianPosition.Trim(),
+                            ApprovalStatus = "Pending"
+                        });
+                        await _context.SaveChangesAsync();
                     }
 
                     _logger.LogInformation("User created a new account with password.");
@@ -173,6 +212,20 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private void ValidateVeterinaryDetails()
+        {
+            if (string.IsNullOrWhiteSpace(Input.LicenseNumber))
+                ModelState.AddModelError("Input.LicenseNumber", "License number is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicName))
+                ModelState.AddModelError("Input.ClinicName", "Clinic name is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicAddress))
+                ModelState.AddModelError("Input.ClinicAddress", "Clinic address is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicContact))
+                ModelState.AddModelError("Input.ClinicContact", "Clinic contact is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicianPosition))
+                ModelState.AddModelError("Input.ClinicianPosition", "Clinician position is required.");
         }
 
         private User CreateUser()
