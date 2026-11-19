@@ -307,22 +307,6 @@ h1 {
     transform: translateY(-2px);
 }
 
-@media (min-width: 1600px) {
-    .container {
-        max-width: 1400px;
-    }
-
-    .img1-container {
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-
-    .p2 .pic,
-    .p4 .pic{
-        max-width: 500px;
-    }
-
-}
 
 /* PET PROFILE STYLES */ 
 
@@ -593,6 +577,7 @@ h1 {
 
 /* Responsive layout */
 
+/* PHONE */
 @media (max-width: 576px) {
     .mobile-nav-links {
         display: none;
@@ -630,22 +615,27 @@ h1 {
     }
 
     .p1 h1 {
-        font-size: 32px;
+        font-size: 30px;
         line-height: 1.2;
         padding: 0 0 15px;
+        font-weight: bold;
     }
 
     .p1 h3,
     .p2 h3,
+    .p3 h3,
     .p4 h3,
     .p5 h3 {
-        font-size: 28px;
+        font-size: 23px;
         line-height: 1.25;
+        font-weight: bold;
     }
 
     .p1 .intro-box {
         padding: 20px;
+        font-size: 15px;
     }
+
 
     .p2,
     .p4 {
@@ -668,13 +658,20 @@ h1 {
     }
 
     .p2 .text-content,
-    .p4 .text-content {
+    .p4 .text-content,
+    .p2 h4 {
         width: 100%;
+        text-align: center;
     }
 
-    .p2 .text-content,
-    .p2 h4 {
-        text-align: center;
+    .p2 .text-content p,
+    .p4 .text-content,
+    .p2 h4{
+        font-size: 15px;
+    }
+
+    .p3 h4{
+        font-size: 20px;
     }
 
     .features {
@@ -686,12 +683,21 @@ h1 {
         padding: 20px;
     }
 
-    .p5 p,
+    .p1 p,
     .p2 p,
+    .p3 p,
     .p4 p,
-    .p1 p {
+    .p5 p{
         font-size: 17px;
         line-height: 1.5;
+    }
+
+    .p2 p,
+    .p4 p{
+        border: 2px solid var(--brown);
+        border-radius: 20px;
+        padding: 20px;
+        margin: 0 auto;
     }
 
     .pet-form-page {
@@ -720,5 +726,58 @@ h1 {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+    }
+}
+
+/* Wide-screen layout */
+@media (min-width: 1200px) {
+    .img1-container {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 30px 5%;
+    }
+
+    .p1,
+    .p2,
+    .p3,
+    .p4,
+    .p5 {
+        padding-left: 12%;
+        padding-right: 12%;
+    }
+
+    .p2,
+    .p4 {
+        gap: 80px;
+    }
+
+        .p2 .pic,
+        .p4 .pic {
+            max-width: 500px;
+        }
+
+        .p2 .text-content,
+        .p4 .text-content {
+            max-width: 650px;
+        }
+
+    .p1 .intro-box {
+        max-width: 1000px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .img1-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .p2 .pic,
+    .p4 .pic {
+        max-width: 500px;
     }
 }
