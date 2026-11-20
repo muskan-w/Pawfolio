@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using pawfolio_webapp.Models;
 using Microsoft.Identity.Client.NativeInterop;
 
 namespace pawfolio_webapp.Areas.Identity.Pages.Account

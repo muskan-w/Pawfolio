@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using pawfolio_webapp.Data;
+using pawfolio_webapp.Models;
 using Smtp2Go;
 using Smtp2Go.Api;
 

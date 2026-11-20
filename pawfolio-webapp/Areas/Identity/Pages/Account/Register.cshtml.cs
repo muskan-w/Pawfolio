@@ -9,17 +9,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
 using System.ComponentModel.DataAnnotations;
+using pawfolio_webapp.Data;
+using pawfolio_webapp.Models;
 using System.Text;
 
 namespace pawfolio_webapp.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly IUserStore<User> _userStore;
+        private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         private readonly IConfiguration _configuration;
 
@@ -84,6 +87,21 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Account Type")]
             public string Role { get; set; }
+
+            [Display(Name = "License number")]
+            public string LicenseNumber { get; set; }
+
+            [Display(Name = "Clinic name")]
+            public string ClinicName { get; set; }
+
+            [Display(Name = "Clinic address")]
+            public string ClinicAddress { get; set; }
+
+            [Display(Name = "Clinic contact")]
+            public string ClinicContact { get; set; }
+
+            [Display(Name = "Clinician position")]
+            public string ClinicianPosition { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -283,27 +301,41 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
             }
         }
 
-        private IdentityUser CreateUser()
+        private void ValidateVeterinaryDetails()
+        {
+            if (string.IsNullOrWhiteSpace(Input.LicenseNumber))
+                ModelState.AddModelError("Input.LicenseNumber", "License number is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicName))
+                ModelState.AddModelError("Input.ClinicName", "Clinic name is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicAddress))
+                ModelState.AddModelError("Input.ClinicAddress", "Clinic address is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicContact))
+                ModelState.AddModelError("Input.ClinicContact", "Clinic contact is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicianPosition))
+                ModelState.AddModelError("Input.ClinicianPosition", "Clinician position is required.");
+        }
+
+        private User CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<User>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(User)}'. " +
+                    $"Ensure that '{nameof(User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<User> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<User>)_userStore;
         }
     }
 }

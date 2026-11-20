@@ -119,13 +119,18 @@ h1 {
     background-color: var(--beige);
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 40px;
 }
 
-.p2 .pic {
-    width: 45%;
-    flex: 0 1 45%;
+.p2 .pic,
+.p4 .pic {
+    width: auto;
+    max-width: 45%;
+    height: 50vh;
+    flex: 0 1 auto;
     object-fit: contain;
+    border-radius: 20px;
 }
 
 .p2 h3,
@@ -133,6 +138,11 @@ h1 {
     font-size: 38px;
     margin-bottom: 20px;
     color: var(--brown);
+}
+
+.p2 .text-content, 
+.p2 h4 {
+    text-align: center;
 }
 
 .p2 p,
@@ -297,22 +307,6 @@ h1 {
     transform: translateY(-2px);
 }
 
-@media (min-width: 1600px) {
-    .container {
-        max-width: 1400px;
-    }
-
-    .img1-container {
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-
-    .p2 .pic,
-    .p4 .pic{
-        max-width: 500px;
-    }
-
-}
 
 /* PET PROFILE STYLES */ 
 
@@ -583,7 +577,129 @@ h1 {
 
 /* Responsive layout */
 
+/* PHONE */
 @media (max-width: 576px) {
+    .mobile-nav-links {
+        display: none;
+        width: 100%;
+        padding-top: 12px;
+        text-align: right;
+    }
+
+    .mobile-nav-links.is-open {
+        display: block;
+    }
+
+    .mobile-nav-links .navbar-nav {
+        align-items: flex-end;
+        width: 100%;
+    }
+
+    /* Home page phone layout */
+    .img1-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 12px 5%;
+    }
+
+    .img1 {
+        height: 220px;
+    }
+
+    .p1,
+    .p2,
+    .p3,
+    .p4,
+    .p5 {
+        padding: 40px 5%;
+    }
+
+    .p1 h1 {
+        font-size: 30px;
+        line-height: 1.2;
+        padding: 0 0 15px;
+        font-weight: bold;
+    }
+
+    .p1 h3,
+    .p2 h3,
+    .p3 h3,
+    .p4 h3,
+    .p5 h3 {
+        font-size: 23px;
+        line-height: 1.25;
+        font-weight: bold;
+    }
+
+    .p1 .intro-box {
+        padding: 20px;
+        font-size: 15px;
+    }
+
+
+    .p2,
+    .p4 {
+        flex-direction: column;
+        justify-content: center;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .p2 .pic,
+    .p4 .pic {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 50vh;
+        flex: 0 1 auto;
+        object-fit: contain;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .p2 .text-content,
+    .p4 .text-content,
+    .p2 h4 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .p2 .text-content p,
+    .p4 .text-content,
+    .p2 h4{
+        font-size: 15px;
+    }
+
+    .p3 h4{
+        font-size: 20px;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .feature {
+        padding: 20px;
+    }
+
+    .p1 p,
+    .p2 p,
+    .p3 p,
+    .p4 p,
+    .p5 p{
+        font-size: 17px;
+        line-height: 1.5;
+    }
+
+    .p2 p,
+    .p4 p{
+        border: 2px solid var(--brown);
+        border-radius: 20px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
     .pet-form-page {
         padding: 40px 5%;
     }
@@ -611,6 +727,4 @@ h1 {
     object-fit: cover;
     border-radius: 50%;
     }
-
-   
 }
