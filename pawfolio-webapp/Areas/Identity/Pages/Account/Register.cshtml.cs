@@ -35,9 +35,9 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
         "VeterinaryProfessional"
             };
         public RegisterModel(
-             UserManager<IdentityUser> userManager,
-             IUserStore<IdentityUser> userStore,
-             SignInManager<IdentityUser> signInManager,
+             UserManager<User> userManager,
+             IUserStore<User> userStore,
+             SignInManager<User> signInManager,
              ILogger<RegisterModel> logger,
              IConfiguration configuration,
              IHttpClientFactory httpClientFactory)
