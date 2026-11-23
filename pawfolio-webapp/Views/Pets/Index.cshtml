@@ -1,56 +1,53 @@
 @model IEnumerable<pawfolio_webapp.Models.Pet>
 
 @{
-    ViewData["Title"] = "Pets";
+    ViewData["Title"] = "My Pets";
 }
 
 <div class="pets-page">
-    <!-- page title -->
-    <div class="pets-header">
-        <h1>My Pets</h1>
-        <p>When you've created a pet profile, it will appear here.</p>
 
-        <!-- link to the create pet page -->
+    <!-- Page heading -->
+    <div class="pets-header">
+        <div class="pets-heading">
+            <h1>My Pets</h1>
+            <p>All your pet profiles exist here - in one space.</p>
+        </div>
+
         <a asp-action="Create" class="pawfolio-btn pets-add-btn">
-            Add A Pet Profile
+            + Add A Pet
         </a>
     </div>
 
-    <!-- display the list of pets (auto generated) -->
-    @if (Model.Any())
+    <!-- Display all pet profiles -->
+    @if (Model != null && Model.Any())
     {
         <div class="pets-grid">
 
-            <!-- loop through each pet in the model and display its details -->
             @foreach (var item in Model)
             {
                 <div class="pet-card">
 
-                    <!-- Pet icon -->
                     <div class="pet-icon">
-                        <img src="~/images/care.jpg" alt="Pet Icon"/>
+                        <img src="~/images/care.jpg" alt="Logo"/>
                     </div>
 
-                    <!-- display each pet's information -->
                     <div class="pet-info">
-                        <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+                        <h2>@item.Name</h2>
 
-                        <p class="pet-breed">
-                            @Html.DisplayFor(modelItem => item.Breed)
-                        </p>
+                        <p class="pet-breed">@item.Breed</p>
 
                         <div class="pet-details">
-                            <span>Age: @Html.DisplayFor(modelItem => item.Age)</span>
-                            <span>Gender: @Html.DisplayFor(modelItem => item.Gender)</span>
+                            <span>Age: @item.Age</span>
+                            <span>Gender: @item.Gender</span>
+                            <span>Species: @item.Species</span>
                         </div>
                     </div>
 
-                    <!-- links to edit or delete the selected pet by PetsController -->
                     <div class="pet-actions">
                         <a asp-action="Edit"
                            asp-route-id="@item.Id"
                            class="pet-edit">
-                            Edit Profile 
+                            Edit Profile
                         </a>
 
                         <a asp-action="Delete"
@@ -67,9 +64,8 @@
     }
     else
     {
-        <!-- if no pets exist -->
         <div class="pets-empty">
-            <h2>No pet profiles yet!</h2>
+            <h2>You don't have any pet profiles yet!</h2>
             <p>Start by creating a profile for your pet.</p>
 
             <a asp-action="Create" class="pawfolio-btn">
@@ -77,4 +73,5 @@
             </a>
         </div>
     }
+
 </div>

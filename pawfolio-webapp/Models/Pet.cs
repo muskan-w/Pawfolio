@@ -27,6 +27,9 @@ namespace pawfolio_webapp.Models
         [Required(ErrorMessage = "Please enter the pet's gender.")]
         public string Gender { get; set; } 
 
+        [Required(ErrorMessage = "Please enter the pet's species.")]
+        public string Species { get; set; }
+
         // Constructor for the Pet class to initialize properties
         public Pet()
         {
@@ -34,6 +37,7 @@ namespace pawfolio_webapp.Models
             Breed = string.Empty;
             Age = 0;
             Gender = string.Empty;
+            Species = string.Empty;
         }
     }
 }

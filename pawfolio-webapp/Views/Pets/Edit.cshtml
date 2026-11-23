@@ -1,60 +1,81 @@
-
 @model pawfolio_webapp.Models.Pet
 
 @{
-    ViewData["Title"] = "Edit Pet";
+    ViewData["Title"] = "Edit Pet Profile";
 }
 
-<h1>Edit Pet</h1>
-<hr/>
+<div class="pet-form-page">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <!-- Page heading -->
+    <div class="pet-form-header">
+        <h1>Edit Pet Profile</h1>
+        <p>Update your pet's information below.</p>
+    </div>
 
-            <!-- hidden field to pass the pet ID -->
+    <!-- Edit form -->
+    <div class="pet-form-card">
+
+        <form asp-action="Edit" method="post">
+
+            <!-- Hidden field to pass the pet ID -->
             <input type="hidden" asp-for="Id"/>
 
-            <!-- display validation errors -->
+            <!-- Display validation errors -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- pet name -->
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+            <!-- Pet name -->
+            <div class="pet-form-group">
+                <label asp-for="Name"></label>
                 <input asp-for="Name" class="form-control"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
-            <!-- pet breed -->
-            <div class="form-group">
-                <label asp-for="Breed" class="control-label"></label>
+            <!-- Pet breed -->
+            <div class="pet-form-group">
+                <label asp-for="Breed"></label>
                 <input asp-for="Breed" class="form-control"/>
                 <span asp-validation-for="Breed" class="text-danger"></span>
             </div>
 
-            <!-- pet age -->
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
+            <!-- Pet age -->
+            <div class="pet-form-group">
+                <label asp-for="Age"></label>
                 <input asp-for="Age" class="form-control"/>
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
 
-            <!-- pet gender -->
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
+            <!-- Pet gender -->
+            <div class="pet-form-group">
+                <label asp-for="Gender"></label>
                 <input asp-for="Gender" class="form-control"/>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
 
-            <!-- submit changes -->
-            <div class="form-group mt-3">
-                <input type="submit" value="Save Changes" class="btn btn-primary"/>
+            <!-- Pet species -->
+            <div class="pet-form-group">
+                <label asp-for="Species"></label>
+                <input asp-for="Species" class="form-control"/>
+                <span asp-validation-for="Species" class="text-danger"></span>
             </div>
+
+            <!-- Form buttons -->
+            <div class="pet-form-actions">
+                <button type="submit" class="pawfolio-btn pet-submit-btn">
+                    Save Changes
+                </button>
+
+                <a asp-action="Index" class="pet-back-btn">
+                    Cancel
+                </a>
+            </div>
+
         </form>
+
     </div>
 </div>
 
-<!-- return to pets list -->
-<div>
-    <a asp-action="Index">Back to Pets</a>
-</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
