@@ -1,0 +1,104 @@
+﻿@model pawfolio_webapp.Models.Pet
+
+@{
+    ViewData["Title"] = $"{Model.Name}'s Profile";
+    var pictureSource = Model.ImageData is { Length: > 0 } && !string.IsNullOrEmpty(Model.ImageContentType)
+        ? $"data:{Model.ImageContentType};base64,{Convert.ToBase64String(Model.ImageData)}"
+        : Url.Content("~/images/care.jpg");
+}
+
+<div class="pets-page pet-profile-page">
+    <div class="pets-header">
+        <div class="pets-heading">
+            <a asp-action="Index" class="profile-back-link">&larr; My Pets</a>
+            <h1>@Model.Name's Profile</h1>
+            <p>Pet information and care history</p>
+        </div>
+        <a asp-action="DownloadProfile" asp-route-id="@Model.Id" class="pawfolio-btn profile-download-btn">
+            Download Profile
+        </a>
+    </div>
+
+    @if (TempData["ProfileError"] is string error)
+    {
+        <div class="alert alert-danger" role="alert">@error</div>
+    }
+    @if (TempData["ProfileMessage"] is string message)
+    {
+        <div class="alert alert-success" role="status">@message</div>
+    }
+
+    <div class="profile-grid">
+        <section class="profile-card profile-summary-card">
+            <div class="profile-photo">
+                <img src="@pictureSource" alt="Photo of @Model.Name" />
+            </div>
+            <div class="profile-summary">
+                <h2>@Model.Name</h2>
+                <p>@Model.Breed</p>
+                <form asp-action="UploadPicture" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+                    <label for="picture" class="form-label">Update profile picture</label>
+                    <input id="picture" name="picture" type="file" class="form-control" accept="image/png,image/jpeg,image/gif,image/webp" required />
+                    <div class="profile-upload-help">PNG, JPEG, GIF, or WebP; up to 5 MB.</div>
+                    <button type="submit" class="pawfolio-btn">Upload Picture</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="profile-card">
+            <h2>Pet Details</h2>
+            <table class="table profile-table">
+                <tbody>
+                    <tr><th scope="row">Species</th><td>@Model.Species</td></tr>
+                    <tr><th scope="row">Breed</th><td>@Model.Breed</td></tr>
+                    <tr><th scope="row">Age</th><td>@Model.Age</td></tr>
+                    <tr><th scope="row">Gender</th><td>@Model.Gender</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="profile-card">
+            <h2>Weight</h2>
+            <p class="care-info-value">@(Model.Weight ?? "No weight information added yet.")</p>
+            <form asp-action="SaveCareInfo" asp-route-id="@Model.Id" method="post" class="care-info-form">
+                <input type="hidden" name="section" value="weight" />
+                <label for="weight" class="form-label">Weight and units</label>
+                <input id="weight" name="value" type="text" class="form-control" maxlength="1000" value="@Model.Weight" placeholder="e.g. 12 kg" />
+                <button type="submit" class="pawfolio-btn">Save Weight</button>
+            </form>
+        </section>
+
+        <section class="profile-card">
+            <h2>Food</h2>
+            <p class="care-info-value">@(Model.Food ?? "No food information added yet.")</p>
+            <form asp-action="SaveCareInfo" asp-route-id="@Model.Id" method="post" class="care-info-form">
+                <input type="hidden" name="section" value="food" />
+                <label for="food" class="form-label">Food information</label>
+                <textarea id="food" name="value" class="form-control" maxlength="1000" rows="3" placeholder="Food type, brand, or feeding notes">@Model.Food</textarea>
+                <button type="submit" class="pawfolio-btn">Save Food</button>
+            </form>
+        </section>
+
+        <section class="profile-card">
+            <h2>Medication</h2>
+            <p class="care-info-value">@(Model.Medication ?? "No medication information added yet.")</p>
+            <form asp-action="SaveCareInfo" asp-route-id="@Model.Id" method="post" class="care-info-form">
+                <input type="hidden" name="section" value="medication" />
+                <label for="medication" class="form-label">Medication information</label>
+                <textarea id="medication" name="value" class="form-control" maxlength="1000" rows="3" placeholder="Medication and dosage notes">@Model.Medication</textarea>
+                <button type="submit" class="pawfolio-btn">Save Medication</button>
+            </form>
+        </section>
+
+        <section class="profile-card">
+            <h2>Vaccination</h2>
+            <p class="care-info-value">@(Model.Vaccination ?? "No vaccination information added yet.")</p>
+            <form asp-action="SaveCareInfo" asp-route-id="@Model.Id" method="post" class="care-info-form">
+                <input type="hidden" name="section" value="vaccination" />
+                <label for="vaccination" class="form-label">Vaccination information</label>
+                <textarea id="vaccination" name="value" class="form-control" maxlength="1000" rows="3" placeholder="Vaccination and date notes">@Model.Vaccination</textarea>
+                <button type="submit" class="pawfolio-btn">Save Vaccination</button>
+            </form>
+        </section>
+    </div>
+</div>

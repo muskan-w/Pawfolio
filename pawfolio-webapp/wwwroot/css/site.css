@@ -901,3 +901,133 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+
+.pet-profile-page .pets-header {
+    align-items: flex-end;
+}
+
+.profile-back-link {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: var(--brown);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.profile-download-btn {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 24px;
+}
+
+.profile-card {
+    min-width: 0;
+    padding: 24px;
+    background: var(--white);
+    border-radius: 16px;
+    border-left: 5px solid var(--brown);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profile-card h2 {
+    margin: 0 0 16px;
+    color: var(--blue);
+    font-size: 24px;
+}
+
+.profile-summary-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+}
+
+.profile-photo {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--gray);
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-summary {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-summary h2 {
+    margin-bottom: 4px;
+}
+
+.profile-summary > p {
+    margin-bottom: 16px;
+    padding: 0;
+    color: var(--brown);
+}
+
+.profile-summary .form-control {
+    margin-bottom: 8px;
+}
+
+.profile-upload-help {
+    margin-bottom: 12px;
+    color: var(--textcolor);
+    font-size: 13px;
+}
+
+.profile-summary .pawfolio-btn {
+    border: 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.profile-table {
+    margin-bottom: 0;
+    color: var(--textcolor);
+}
+
+.profile-table th {
+    width: 35%;
+    color: var(--blue);
+}
+
+@media (max-width: 576px) {
+    .pet-profile-page .pets-header {
+        align-items: flex-start;
+    }
+
+    .profile-summary-card {
+        flex-direction: column;
+    }
+}
+
+.care-info-value {
+    min-height: 32px;
+    margin-bottom: 14px;
+    padding: 0;
+    color: var(--textcolor);
+    font-size: 16px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.care-info-form .form-control {
+    margin-bottom: 12px;
+}
+
+.care-info-form .pawfolio-btn {
+    border: 0;
+    font-size: 15px;
+    cursor: pointer;
+}

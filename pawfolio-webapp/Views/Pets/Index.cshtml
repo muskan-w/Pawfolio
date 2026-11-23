@@ -43,6 +43,12 @@
                         </div>
                     </div>
 
+                    @* add view profile button *@
+                    <a asp-action="Profile" 
+                    asp-route-id="@item.Id" 
+                    class="pawfolio-btn">View Profile
+                    </a>
+
                     <div class="pet-actions">
                         <a asp-action="Edit"
                            asp-route-id="@item.Id"

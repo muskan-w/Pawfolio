@@ -30,6 +30,18 @@ namespace pawfolio_webapp.Models
         [Required(ErrorMessage = "Please enter the pet's species.")]
         public string Species { get; set; }
 
+        public byte[]? ImageData { get; set; }
+
+        public string? ImageContentType { get; set; }
+
+        public string? Weight { get; set; }
+
+        public string? Food { get; set; }
+
+        public string? Medication { get; set; }
+
+        public string? Vaccination { get; set; }
+
         // Constructor for the Pet class to initialize properties
         public Pet()
         {
