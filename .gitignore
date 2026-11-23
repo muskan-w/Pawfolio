@@ -14,3 +14,10 @@
 **/bin/
 **/obj/
 *.env
+/pawfolio-webapp/Properties/PublishProfiles/site99320-WebDeploy.pubxml
+
+#local files
+*.txt
+
+# Local development secrets
+/pawfolio-webapp/appsettings.Development.json

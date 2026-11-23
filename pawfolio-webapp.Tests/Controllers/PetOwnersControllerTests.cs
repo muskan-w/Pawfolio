@@ -7,7 +7,7 @@ using pawfolio_webapp.Controllers;
 using pawfolio_webapp.Data;
 using pawfolio_webapp.Models;
 
-namespace pawfolio_webapp.Tests;
+namespace Controllers;
 
 [TestClass]
 public class PetOwnersControllerTests

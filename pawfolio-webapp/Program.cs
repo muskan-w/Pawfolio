@@ -19,10 +19,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         errorNumbersToAdd: null)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>() //adding role support
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient("Smtp2Go", client =>
+{
+    client.BaseAddress = new Uri("https://api.smtp2go.com/");
+});
 
 //authentication and authorization policies
 var configuration = builder.Configuration;
@@ -35,8 +41,8 @@ builder.Services.AddAuthentication()
 // Add Google Authentication services --
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
-    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+    googleOptions.ClientId = configuration["Authentication:Google:ClientId"] ?? string.Empty;
+    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"] ?? string.Empty;
 });
 //session variable to store user role
 builder.Services.AddSession();
@@ -50,20 +56,29 @@ using (var scope = app.Services.CreateScope())
 
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
+    var roles = new[]
+    {
+    "Customer",
+    "PetOwner",
+    "VeterinaryProfessional"
+};
 
-    foreach (var roleName in new[] {"PetOwner", "VeterinaryProfessional" })
+    foreach (var roleName in roles)
     {
         if (!await roleManager.RoleExistsAsync(roleName))
         {
             var roleResult = await roleManager.CreateAsync(new IdentityRole(roleName));
+
             if (!roleResult.Succeeded)
             {
                 throw new InvalidOperationException(
-                    $"Unable to create the {roleName} role: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
+                    $"Unable to create the {roleName} role: " +
+                    $"{string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
             }
         }
     }
 }
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

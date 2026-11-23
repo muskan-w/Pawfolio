@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Smtp2Go;
-using Smtp2Go.Api;
-using Smtp2Go.Api.Models.Emails;
+using Microsoft.AspNetCore.WebUtilities;
+
 using System.ComponentModel.DataAnnotations;
+using pawfolio_webapp.Data;
 using pawfolio_webapp.Models;
+using System.Text;
 
 namespace pawfolio_webapp.Areas.Identity.Pages.Account
 {
@@ -21,18 +22,33 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
         private readonly IUserStore<User> _userStore;
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly ApplicationDbContext _context;
 
+        private readonly IConfiguration _configuration;
+
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        private static readonly HashSet<string> AllowedRoles =
+            new(StringComparer.Ordinal)
+            {
+        "PetOwner",
+        "VeterinaryProfessional"
+            };
         public RegisterModel(
-            UserManager<User> userManager,
-            IUserStore<User> userStore,
-            SignInManager<User> signInManager,
-            ILogger<RegisterModel> logger)
+             UserManager<User> userManager,
+             IUserStore<User> userStore,
+             SignInManager<User> signInManager,
+             ILogger<RegisterModel> logger,
+             IConfiguration configuration,
+             IHttpClientFactory httpClientFactory)
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
+            _configuration = configuration;
+            _httpClientFactory = httpClientFactory;
         }
 
         /// <summary>
@@ -71,6 +87,21 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Account Type")]
             public string Role { get; set; }
+
+            [Display(Name = "License number")]
+            public string LicenseNumber { get; set; }
+
+            [Display(Name = "Clinic name")]
+            public string ClinicName { get; set; }
+
+            [Display(Name = "Clinic address")]
+            public string ClinicAddress { get; set; }
+
+            [Display(Name = "Clinic contact")]
+            public string ClinicContact { get; set; }
+
+            [Display(Name = "Clinician position")]
+            public string ClinicianPosition { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -110,69 +141,178 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+
+            ExternalLogins =
+                (await _signInManager.GetExternalAuthenticationSchemesAsync())
+                .ToList();
+
+            if (!ModelState.IsValid)
             {
-                var user = CreateUser();
-                user.FirstName = Input.FirstName.Trim();
-                user.LastName = Input.LastName.Trim();
-                user.Role = Input.Role;
+                return Page();
+            }
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
+            if (!AllowedRoles.Contains(Input.Role))
+            {
+                ModelState.AddModelError(
+                    nameof(Input.Role),
+                    "The selected account type is not valid.");
 
-                if (result.Succeeded)
-                {
-                    // Assign the selected role to the user
-                    var roleResult = await _userManager.AddToRoleAsync(user, Input.Role);
-                    if (!roleResult.Succeeded)
-                    {
-                        await _userManager.DeleteAsync(user);
+                return Page();
+            }
 
-                        foreach (var error in roleResult.Errors)
-                        {
-                            ModelState.AddModelError(string.Empty, error.Description);
-                        }
+            var user = CreateUser();
 
-                        return Page();
-                    }
+            await _userStore.SetUserNameAsync(
+                user,
+                Input.Email,
+                CancellationToken.None);
 
-                    _logger.LogInformation("User created a new account with password.");
+            await _emailStore.SetEmailAsync(
+                user,
+                Input.Email,
+                CancellationToken.None);
 
-                    try
-                    {
-                        var service = new Smtp2GoApiService("api-3E53075C32244348A40DA3E8E760F8BA");
+            var result = await _userManager.CreateAsync(user, Input.Password);
 
-                        var message = new EmailMessage(
-                            "Pawfolio Team <ndesouz1@lakeheadu.ca>", 
-                            $"{Input.FirstName} {Input.LastName} <{Input.Email}>",
-                            "Welcome to Pawfolio!"
-                        );
-
-                        message.BodyHtml = $"<html><h1>Welcome to Pawfolio, {Input.FirstName}!</h1><p>Your account has been successfully created with the role profile: <strong>{Input.Role}</strong>.</p></html>";
-                        message.BodyText = $"Welcome to Pawfolio, {Input.FirstName}!\nYour account has been successfully created with the role profile: {Input.Role}.";
-
-                        var response = await service.SendEmail(message);
-
-                        _logger.LogInformation("SMTP2GO Dispatch Event completed successfully.");
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError($"SMTP2GO Delivery Pipeline Interruption: {ex.Message}");
-                    }
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnUrl);
-                }
+            if (!result.Succeeded)
+            {
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
+                return Page();
             }
 
-            // If we got this far, something failed, redisplay form
-            return Page();
+            var roleResult = await _userManager.AddToRoleAsync(user, Input.Role);
+
+            if (!roleResult.Succeeded)
+            {
+                await _userManager.DeleteAsync(user);
+
+                foreach (var error in roleResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return Page();
+            }
+
+            var confirmationCode = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var encodedConfirmationCode = WebEncoders.Base64UrlEncode(
+                Encoding.UTF8.GetBytes(confirmationCode));
+            var confirmationLink = Url.PageLink(
+                "/Account/ConfirmEmail",
+                values: new { area = "Identity", userId = user.Id, code = encodedConfirmationCode },
+                protocol: Request.Scheme);
+
+            try
+            {
+                var apiKey = _configuration["Smtp2Go:ApiKey"]?.Trim();
+                var senderEmail = _configuration["Smtp2Go:SenderEmail"]?.Trim();
+                var recipientEmail = Input.Email?.Trim();
+
+                if (string.IsNullOrWhiteSpace(apiKey))
+                {
+                    throw new InvalidOperationException(
+                        "Smtp2Go:ApiKey is missing.");
+                }
+
+                if (string.IsNullOrWhiteSpace(senderEmail))
+                {
+                    throw new InvalidOperationException(
+                        "Smtp2Go:SenderEmail is missing.");
+                }
+
+                if (string.IsNullOrWhiteSpace(recipientEmail))
+                {
+                    throw new InvalidOperationException(
+                        "The recipient email address is missing.");
+                }
+
+                var payload = new
+                {
+                    api_key = apiKey,
+                    sender = senderEmail,
+                    to = new[] { recipientEmail },
+                    subject = "Confirm your Pawfolio account",
+                    text_body = $"Welcome to Pawfolio, {Input.FirstName}! Confirm your email: {confirmationLink}",
+                    html_body =
+                        $"<html><body>" +
+                        $"<h1>Welcome to Pawfolio, {Input.FirstName}!</h1>" +
+                        $"<p>Your account has been created. <a href=\"{confirmationLink}\">Confirm your email address</a> to finish registration.</p>" +
+                        "</body></html>"
+                };
+
+                var httpClient = _httpClientFactory.CreateClient("Smtp2Go");
+
+                using var httpResponse = await httpClient.PostAsJsonAsync(
+                    "v3/email/send",
+                    payload);
+
+                var responseBody =
+                    await httpResponse.Content.ReadAsStringAsync();
+
+                _logger.LogInformation(
+                    "SMTP2GO HTTP status: {StatusCode}; response: {Response}",
+                    (int)httpResponse.StatusCode,
+                    responseBody);
+
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    throw new InvalidOperationException(
+                        $"SMTP2GO rejected the request: {responseBody}");
+                }
+
+                _logger.LogInformation(
+                    "User created a new account with password.");
+
+                return RedirectToPage(
+                    "RegisterConfirmation",
+                    new
+                    {
+                        email = Input.Email,
+                        returnUrl
+                    });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    "SMTP2GO email delivery failed for {Email}.",
+                    Input.Email);
+
+                // Do not leave an account that cannot complete registration.
+                var deleteResult = await _userManager.DeleteAsync(user);
+
+                if (!deleteResult.Succeeded)
+                {
+                    _logger.LogError(
+                        "The user {Email} could not be deleted after email failure.",
+                        Input.Email);
+                }
+
+                ModelState.AddModelError(
+                    string.Empty,
+                    "Registration could not be completed because the confirmation " +
+                    "email could not be sent.");
+
+                return Page();
+            }
+        }
+
+        private void ValidateVeterinaryDetails()
+        {
+            if (string.IsNullOrWhiteSpace(Input.LicenseNumber))
+                ModelState.AddModelError("Input.LicenseNumber", "License number is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicName))
+                ModelState.AddModelError("Input.ClinicName", "Clinic name is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicAddress))
+                ModelState.AddModelError("Input.ClinicAddress", "Clinic address is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicContact))
+                ModelState.AddModelError("Input.ClinicContact", "Clinic contact is required.");
+            if (string.IsNullOrWhiteSpace(Input.ClinicianPosition))
+                ModelState.AddModelError("Input.ClinicianPosition", "Clinician position is required.");
         }
 
         private User CreateUser()

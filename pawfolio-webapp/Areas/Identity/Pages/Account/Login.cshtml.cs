@@ -15,17 +15,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using pawfolio_webapp.Models;
+using Microsoft.Identity.Client.NativeInterop;
 
 namespace pawfolio_webapp.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
+            ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -127,10 +133,24 @@ namespace pawfolio_webapp.Areas.Identity.Pages.Account
                     _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
+                if (result.IsNotAllowed)
+                {
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    _logger.LogWarning(
+                        "Login was not allowed for {Email}. Email confirmed: {EmailConfirmed}.",
+                        Input.Email,
+                        user?.EmailConfirmed);
+                    ModelState.AddModelError(
+                        string.Empty,
+                        "You must confirm your email address before signing in.");
+                    return Page();
+                }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    _logger.LogWarning("Invalid password or unknown user for {Email}.", Input.Email);
                     return Page();
+
                 }
             }
 

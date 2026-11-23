@@ -349,6 +349,22 @@ namespace pawfolio_webapp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
+
+            modelBuilder.Entity("pawfolio_webapp.Models.VetInfo", b =>
+                {
+                    b.HasOne("pawfolio_webapp.Models.User", "User")
+                        .WithOne("VetInfo")
+                        .HasForeignKey("pawfolio_webapp.Models.VetInfo", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("pawfolio_webapp.Models.User", b =>
+                {
+                    b.Navigation("VetInfo");
+                });
 #pragma warning restore 612, 618
         }
     }
