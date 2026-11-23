@@ -50,6 +50,13 @@
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
 
+            <!-- species card -->
+            <div class="form-group pet-form-group">
+                <label asp-for="Species" class="control-label">Species</label>
+                <input asp-for="Species" class="form-control" placeholder="Enter your pet's species (e.g. Dog, Cat)"/>
+                <span asp-validation-for="Species" class="text-danger"></span>
+            </div>
+
             <!-- submit form -->
             <div class="pet-form-actions">
                 <input type="submit" value="Create Pet Profile" class="pawfolio-btn pet-submit-btn"/>

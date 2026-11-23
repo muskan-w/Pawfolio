@@ -117,6 +117,7 @@ namespace pawfolio_webapp.Controllers
             existingPet.Breed = pet.Breed;
             existingPet.Age = pet.Age;
             existingPet.Gender = pet.Gender;
+            existingPet.Species = pet.Species;
 
 
             // save to db

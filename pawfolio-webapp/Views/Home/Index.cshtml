@@ -117,6 +117,8 @@
     <!--https://www.pexels.com/photo/person-hand-holding-dog-paw-20195994/-->
 </section>
 
+<!-- Button to prompt the user to go to their dashboard -->
+
 <section class="p5">
     <h3>Start your pet's health journey with Pawfolio.</h3>
 
@@ -125,9 +127,22 @@
         monitor, and share your pet's health information.
     </p>
 
-    <a class="btn pawfolio-btn"
-       asp-area="Identity"
-       asp-page="/Account/Register">
-        Get Started
-    </a>
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <!-- Logged-in users can go to their dashboard -->
+        <a class="btn pawfolio-btn"
+           asp-controller="PetOwners"
+           asp-action="Index">
+            Go to My Dashboard
+        </a>
+    }
+    else
+    {
+        <!-- Unauthorized users are prompted to register -->
+        <a class="btn pawfolio-btn"
+           asp-area="Identity"
+           asp-page="/Account/Register">
+            Get Started
+        </a>
+    }
 </section>
